@@ -18,8 +18,8 @@ const RegisterForm = () => {
   }
 
   return (
-    <div className='d-flex w-100 align-items-center py-4 bg-body-tertiary'>
-      <main className='form-signin w-50 py-5 mt-5 m-auto d-flex flex-column align-items-center border justify-content-center'>
+    <div className='d-flex w-100 align-items-center py-4'>
+      <main className='form-signin w-50 py-5 mt-5 m-auto d-flex flex-column shadow-lg rounded align-items-center border justify-content-center'>
         <h1 className='h3 mb-3 fw-normal'>Sign in</h1>
         <form onSubmit={(e) => register(e)}>
           <div className='form-floating w-90 mb-2'>

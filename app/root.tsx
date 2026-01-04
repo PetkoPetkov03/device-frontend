@@ -9,8 +9,9 @@ import {
 
 import type { Route } from "./+types/root";
 import "./app.css";
-import Header from "./components/Header";
+import Header from "./components/layout/Header";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import AuthProvider from "./providers/auth/AuthProvider";
 
 
 
@@ -36,11 +37,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body>
-        <Header />
-        {children}
-        <ScrollRestoration />
-        <Scripts />
+      <body className="w-full h-full">
+        <AuthProvider>
+          <Header />
+          {children}
+          <ScrollRestoration />
+          <Scripts />
+        </AuthProvider>
       </body>
     </html>
   );
