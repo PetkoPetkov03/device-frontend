@@ -5,7 +5,7 @@ import { AuthContext } from '~/providers/auth/AuthProvider'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '../ui/form'
 import { useForm } from 'react-hook-form'
 import * as z from "zod"
-import { loginSchema, type loginResponseShcema, type userScheme } from '~/lib/schemas/authschemas'
+import { loginSchema, type loginResponseSchema, type userSchema } from '~/lib/schemas/authschemas'
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Input } from '../ui/input'
 import { Button } from '../ui/button'
@@ -19,9 +19,9 @@ interface ErrorResponse {
   validations: []
 }
 
-type UserEntity = z.infer<typeof userScheme>;
+type UserEntity = z.infer<typeof userSchema>;
 
-type JsonResponse = z.infer<typeof loginResponseShcema>;
+type JsonResponse = z.infer<typeof loginResponseSchema>;
 
 type LoginBody = z.infer<typeof loginSchema>;
 

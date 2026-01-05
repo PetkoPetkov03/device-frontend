@@ -1,13 +1,13 @@
 import React, { useEffect, useState, type ReactElement, type ReactNode } from 'react'
 import * as z from "zod"
-import type { userScheme } from '~/lib/schemas/authschemas'
+import type { userSchema } from '~/lib/schemas/authschemas'
 
 type AuthContextType = {
-    user: z.infer<typeof userScheme> | null,
+    user: z.infer<typeof userSchema> | null,
     token: string | null,
     isAuthorized: boolean,
     isAuthenticated: boolean,
-    login: (user: z.infer<typeof userScheme>, token: string) => void,
+    login: (user: z.infer<typeof userSchema>, token: string) => void,
     logout: () => void
 }
 
@@ -19,19 +19,19 @@ type AuthChildren = {
 }
 
 const AuthProvider = ({ children }: AuthChildren) => {
-    const [user, setUser] = useState<z.infer<typeof userScheme>|null>({});
+    const [user, setUser] = useState<z.infer<typeof userSchema>|null>({});
     const [token, setToken] = useState<string|null>(null);
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
     const [isAuthorized, setIsAuthorized] = useState<boolean>(false);
 
-    const hasPermissions = (user: z.infer<typeof userScheme>) => {
+    const hasPermissions = (user: z.infer<typeof userSchema>) => {
         if(user.role === "ADMIN") {
             return true;
         }
         return false;
     }
 
-    const login = (user: z.infer<typeof userScheme>, token: string) => {
+    const login = (user: z.infer<typeof userSchema>, token: string) => {
         sessionStorage.setItem("user", JSON.stringify(user));
         cookieStore.set("token", token);
         setToken(token);
@@ -51,10 +51,13 @@ const AuthProvider = ({ children }: AuthChildren) => {
     useEffect(() => {
         let item: CookieListItem|null;
         cookieStore.get("token").then((result) => {
+            
             item = result
         }
         ).finally(() => {
-            setToken(item?.value ?? null);
+            console.log(`TOKEN TOKEN TOKEN ${item?.value}`);
+            
+            setToken(item?.value!);
         });
         let cUser;
         const session = sessionStorage.getItem("user");
