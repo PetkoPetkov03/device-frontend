@@ -11,6 +11,7 @@ const Logout = () => {
         navigate("/", {
             replace: true,
         });
+        location.reload();
     },[]);
   return null;
 }
